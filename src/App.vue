@@ -16,7 +16,6 @@
   </div>
 </template>
 <script>
-import axios from 'axios'
 import PageHeader from '@/components/PageHeader/index.vue'
 import PageFooter from '@/components/PageFooter/index.vue'
 
@@ -31,12 +30,6 @@ export default {
     }
   },
   async mounted () {
-    console.log('000 -> ')
-
-    const {data: {data}} = await axios.get('http://localhost:8080/getSlider')
-
-    console.log('data -> ', data)
-
   }
 }
 </script>
