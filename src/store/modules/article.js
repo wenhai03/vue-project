@@ -1,6 +1,6 @@
 
 export default {
-  namespaced: true,
+  namespaced: 'article',
   state: {
   },
   mutations: {

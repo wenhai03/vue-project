@@ -7,6 +7,8 @@ export const reg = '/user/reg'
 export const login = '/user/login'
 export const forget = '/user/forget'
 
+export const getCaptcha = '/public/getCaptcha' // 获取验证码
+
 // 文章相关的 post
 
 export const articlePost = '/article/post'

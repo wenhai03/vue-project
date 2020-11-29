@@ -15,28 +15,3 @@ export const getSlider = (options) => {
   
 }
 
-/*
-export const getSlider = (options) => {
-  const template = {
-    'str|2-3': '小明',
-    'name|2': 'lison',
-    'age|+2': 18
-  }
-  let i = 3
-  let arr = []
-  while (i--){
-    arr.push(template)
-  }
-  return Mock.mock(arr)
-  
-}
-*/
-
-/*
-export const getSlider = (options) => {
-  return {
-    name: '0000000'
-  }
-
-}
-*/

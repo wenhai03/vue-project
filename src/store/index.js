@@ -18,6 +18,4 @@ Vue.use(Vuex)
 //   module[moduleName].namespaced = true
 // })
 
-console.log('rootModule -> ', rootModule)
-
 export default new Vuex.Store(rootModule)

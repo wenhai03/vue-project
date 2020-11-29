@@ -1,10 +1,14 @@
 import Mock from 'mockjs'
+import {getCaptcha} from './response/getCaptcha'
 import {getSlider} from './response/getSlider'
+import {login} from './response/user'
+
 
 const Random = Mock.Random
 
 Mock.mock('http://localhost:8080/getSlider', getSlider)
-// Mock.mock(/\/getSlider/, {name: '1111'})
+Mock.mock('http://localhost:8080/public/getCaptcha', getCaptcha)
+Mock.mock('http://localhost:8080/user/login', login)
 
 // 设置响应的时间
 Mock.setup({

@@ -5,3 +5,13 @@ import axios from '@/utils/axios'
 
 // 获取轮播图接口
 export const getBannerList = () => axios.get(config.getBannerList)
+
+
+export const getCaptcha = (uid) => {
+  if (uid) {
+    return axios.get(config.getCaptcha)
+  }
+  
+  return Promise.reject('uid 不存在')
+}
+
