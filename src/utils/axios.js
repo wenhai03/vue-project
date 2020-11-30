@@ -1,12 +1,14 @@
 // 对axios二次封装
 import axios from 'axios'
 import {Loading} from 'element-ui'
+import store from '../store/index'
+import * as types from '../store/action-types'
 
 let loadingInstance
 
 // 封装的目的是封装公共的拦截器，每个实例有单独的自己拦截器
 // 创建一个单独的实例，每次请求都使用这个方法来创建实例
-
+// 当页面切换时候 删除不必要的请求
 class Http {
   constructor () {
     this.timeout = 3000
@@ -30,13 +32,18 @@ class Http {
       this.queue[url] = true
       console.log('this.queue -> ', this.queue)
       
-      if (Object.keys(this.queue).length == 0) {
+      if (Object.keys(this.queue).length === 0) {
         // 当前是所有请求中的第一个
         console.log('start -> ')
         loadingInstance = Loading.service({fullscreen: true})
         
         debugger
       }
+      
+      let Cancel = axios.CancelToken
+      config.cancelToken = new Cancel(function (c) {
+        store.commit(types.SET_REQUEST_TOKEN, c)
+      })
       
       return config
     })
