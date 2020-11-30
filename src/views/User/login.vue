@@ -4,11 +4,11 @@
     <el-col :span="10" :offset="7">
       <el-form :rules="rules" ref="ruleForm" :model="ruleForm" label-width="80px">
         <el-form-item label="用户名" prop="username">
-          <el-input v-model="ruleForm.username"></el-input>
+          <el-input v-model="ruleForm.username" placeholder="输入用户名"></el-input>
         </el-form-item>
 
         <el-form-item label="密码" prop="password">
-          <el-input v-model="ruleForm.password" type="password"></el-input>
+          <el-input v-model="ruleForm.password" type="password" placeholder="输入密码"></el-input>
         </el-form-item>
 
         <el-form-item label="验证码">

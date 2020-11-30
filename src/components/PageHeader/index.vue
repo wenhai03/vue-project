@@ -6,16 +6,17 @@
         <el-menu-item index="/">首页</el-menu-item>
         <el-menu-item index="/post">发表文章</el-menu-item>
       </el-menu>
-
     </el-col>
     <el-col :span="4">
       <el-menu mode="horizontal" text-color="#fff" active-text-color="#fff" background-color="#2a2a2a" :router="true" class="header-right" >
-        <el-menu-item index="/login">登录</el-menu-item>
-        <el-menu-item index="/reg">注册</el-menu-item>
+        <template v-if="!Object.keys(userInfo).length">
+          <el-menu-item index="/login">登录</el-menu-item>
+          <el-menu-item index="/reg">注册</el-menu-item>
+        </template>
 
-        <template v-if="false">
-          <el-submenu>
-            <template slot="title">张三</template>
+        <template v-else>
+          <el-submenu index="0">
+            <template slot="title">{{userInfo.username}}</template>
             <el-menu-item>退出登录</el-menu-item>
           </el-submenu>
         </template>
@@ -25,8 +26,17 @@
 </template>
 
 <script>
+import {createNamespacedHelpers} from 'vuex'
+const {mapState} = createNamespacedHelpers('user')
+
 export default {
-  name: "index"
+  name: "PageHeader",
+  computed: {
+    userInfo() {
+      console.log(' -> ', this.$store.state.user.userInfo)
+      return this.$store.state.user.userInfo
+    }
+  },
 }
 </script>
 

@@ -3,6 +3,7 @@ import axios from 'axios'
 import {Loading} from 'element-ui'
 import store from '../store/index'
 import * as types from '../store/action-types'
+import {getLocal} from "@/utils/local"
 
 let loadingInstance
 
@@ -36,14 +37,14 @@ class Http {
         // 当前是所有请求中的第一个
         console.log('start -> ')
         loadingInstance = Loading.service({fullscreen: true})
-        
-        debugger
       }
       
       let Cancel = axios.CancelToken
       config.cancelToken = new Cancel(function (c) {
         store.commit(types.SET_REQUEST_TOKEN, c)
       })
+      // jwt规范
+      config.headers.authoriztion = 'Bear' + getLocal('token')
       
       return config
     })
