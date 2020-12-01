@@ -1,6 +1,19 @@
-- 页面loading效果 切换页面取消请求
-实现jwt登录权限导航校验
-菜单权限校验
-按钮权限校验
+# vue-permission
 
-action和mutation区别
+## Project setup
+```
+yarn install
+```
+
+### Compiles and hot-reloads for development
+```
+yarn serve
+```
+
+### Compiles and minifies for production
+```
+yarn build
+```
+
+### Customize configuration
+See [Configuration Reference](https://cli.vuejs.org/config/).

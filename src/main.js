@@ -2,7 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-
+import Api from './api'
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 
@@ -11,7 +11,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 Vue.config.productionTip = false
-
+Vue.prototype.$api = Api
 Vue.use(ElementUI);
 
 new Vue({
