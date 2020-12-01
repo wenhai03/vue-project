@@ -85,6 +85,7 @@ export default {
         if (valid) {
           // 调用接口
           const res = await this[types.SET_USER_LOGIN]({...this.ruleForm, uid: this.uuid})
+          this.$router.history.push('/')
         }
       })
 

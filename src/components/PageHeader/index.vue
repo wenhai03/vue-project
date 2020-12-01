@@ -17,7 +17,8 @@
         <template v-else>
           <el-submenu index="0">
             <template slot="title">{{userInfo.username}}</template>
-            <el-menu-item>退出登录</el-menu-item>
+            <el-menu-item index="/manager">管理页面</el-menu-item>
+            <el-menu-item index="/login">退出登录</el-menu-item>
           </el-submenu>
         </template>
       </el-menu>

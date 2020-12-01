@@ -33,6 +33,22 @@ export default {
         next()
       }
     }
-    
+  },
+  'menuPermission': async function (to, from, next) {
+    if ( store.state.user.menuPermission) {
+      // 是否添加过路由了
+      // 是否添加过路由了，如果已经添加过 那应该也往下走
+      if (!store.state.user.menuPermission) {
+        // 获取最新路由权限 根据用户权限来获取
+        await store.dispatch(`user/${types.SET_ROUTER}`) //添加路由
+        
+        next({...to, require: true}) // hack
+      } else {
+        // 已经获取过了菜单权限了 或者页面加载完毕后
+        next()
+      }
+    } else {
+      next()
+    }
   }
 }

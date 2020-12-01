@@ -31,7 +31,6 @@ class Http {
     instance.interceptors.request.use((config) => {
       // 所有的请求都会走着
       this.queue[url] = true
-      console.log('this.queue -> ', this.queue)
       
       if (Object.keys(this.queue).length === 0) {
         // 当前是所有请求中的第一个

@@ -19,3 +19,14 @@ export const login = () => {
   return Mock.mock(template)
   
 }
+
+export const validate = () => {
+  const template = {
+    'data': {
+      token: Random.guid()
+    }
+  }
+  
+  return Mock.mock(template)
+  
+}
