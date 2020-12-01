@@ -1,7 +1,7 @@
 import store from '../store/index'
 import * as types from '../store/action-types'
 
-const whiteList = ['/reg']
+// const whiteList = ['/reg']
 
 export default {
   // 名字给用户看
@@ -15,9 +15,9 @@ export default {
   'loginPermission': async function (to, from, next) {
     // 返回的结果 还是要存放到vuex中
     // whiteList 白名单
-    if (whiteList.includes(to.path)) {
-      return next()
-    }
+    // if (whiteList.includes(to.path)) {
+    //   return next()
+    // }
     await store.dispatch(`user/${types.SET_USER_VALIDATE}`)
     console.log('store.state.user.hasPermission -> ', store.state.user.hasPermission)
     if (store.state.user.hasPermission) {
@@ -39,18 +39,17 @@ export default {
       }
     }
   },
-  'menuPermission': async function (to, from, next) {
-    console.log('store.state.user.menuPermission -> ', store.state.user.menuPermission)
-    if ( store.state.user.menuPermission) {
-      console.log('3-1-> ')
+  'menuPermission':  function (to, from, next) {
+    console.log('menuPermission 判断 hasPermission-> ', store.state.user.hasPermission)
+    if ( store.state.user.hasPermission) {
       // 是否添加过路由了
       // 是否添加过路由了，如果已经添加过 那应该也往下走
       if (!store.state.user.menuPermission) {
-        console.log('3-2-> ')
         // 获取最新路由权限 根据用户权限来获取
-        await store.dispatch(`user/${types.SET_ROUTER}`) // 添加路由
-        
-        next({...to, replace: true}) // hack
+        store.dispatch(`user/${types.SET_ROUTER}`).then(r => {
+          // 访问路径时候再跳转下，然后menuPermission就有值，页面也加载了
+          next({...to, replace: true}) // hack
+        }) // 添加路由
       } else {
         // 已经获取过了菜单权限了 或者页面加载完毕后
         next()

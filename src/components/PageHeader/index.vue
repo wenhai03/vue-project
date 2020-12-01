@@ -1,13 +1,13 @@
 <template>
   <el-row >
-    <el-col :span="20" class="header-nav">
+    <el-col :span="19" class="header-nav">
       <img src="@/assets/logo.png" class="logo" alt="">
       <el-menu :router="true" mode="horizontal" active-text-color="#fff" background-color="#2a2a2a" text-color="#fff">
         <el-menu-item index="/">首页</el-menu-item>
         <el-menu-item index="/post">发表文章</el-menu-item>
       </el-menu>
     </el-col>
-    <el-col :span="4">
+    <el-col :span="5">
       <el-menu mode="horizontal" text-color="#fff" active-text-color="#fff" background-color="#2a2a2a" :router="true" class="header-right" >
         <template v-if="!Object.keys(userInfo).length">
           <el-menu-item index="/login">登录</el-menu-item>

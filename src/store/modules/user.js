@@ -3,25 +3,7 @@ import * as api from '@/api/user'
 import {setLocal, getLocal} from '@/utils/local'
 import per from '@/router/per'
 import router from '@/router/index'
-import fa from "element-ui/src/locale/lang/fa"
 
-
-function filterRouter(authList) {
-  let auths = authList.map(item => item.auth)
-  function filter(routes) {
-    return routes.filter(route => {
-       if (auths.includes(route.meta.auth)) {
-         if (route.children) {
-           route.children = filter(route.children)
-         }
-         return route
-       }
-    })
-  }
-  
-  return filter(per)
-
-}
 export default {
   namespaced: 'user',
   state: {
@@ -33,7 +15,7 @@ export default {
   mutations: {
     // 设置用户信息
     [types.SET_USER] (state, userInfo) {
-      console.log('userInfo -> ', userInfo)
+      // console.log('userInfo -> ', userInfo)
       state.userInfo = userInfo
       if (userInfo && userInfo.token) {
         setLocal('token', userInfo.token) // 更新token
@@ -45,6 +27,7 @@ export default {
       
     },
     [types.SET_MENU_PERMISSION](state, has){
+      console.log('has -> ', has)
       state.menuPermission = has
     
     }
@@ -61,11 +44,13 @@ export default {
       }
     },
     async [types.SET_USER_VALIDATE]({commit}) {
+      console.log('验证用户 -> ')
+      console.log('不存在token getLocal -> ', !getLocal('token'))
       // 先看下用户有没有权限
       if (!getLocal('token')) return false // 没有权限
       try {
         const result = await api.validate() // 会调用ajax请求，会携带token，后端会验证
-        console.log('result -> ', result)
+        // console.log('result -> ', result)
         commit(types.SET_USER, result)
         commit(types.SET_PERMISSION, true)
       } catch (e) {
@@ -75,13 +60,18 @@ export default {
     },
     [types.SET_ROUTER] ({commit, state}) {
       const authList = state.userInfo.authList // 用户权限 去路由表筛选
-      console.log('authList0000', authList)
+      console.log('后台返回的用户权限信息', authList)
       if (authList) {
         const routes = filterRouter(authList) // 过滤路由
-        let route = router.options.routes.find(item => item.path === 'manager') // 找到管理的路由
-        router.children = routes // 给她添加还在
+        console.log('过滤路由 最新routes -> ', routes)
+        console.log('router.options -> ', router.options)
+        let route = router.options.routes.find(item => item.path === '/manager') // 找到管理的路由
+        console.log('find route -> ', route)
+        route.children = routes // 给当前添加过滤后的最新路由
+        console.log('final route -> ', route)
+        console.log('router -> ', router)
         router.addRoutes([route]) // 把最新的放到路由中
-        
+        console.log('final router -> ', router)
         commit(types.SET_MENU_PERMISSION, true) // 表示已经设置完菜单权限
       
       } else {
@@ -90,4 +80,21 @@ export default {
       }
     }
   }
+}
+
+function filterRouter(authList) {
+  let auths = authList.map(item => item.auth)
+  console.log('auths -> ', auths)
+  function filter(routes) {
+    return routes.filter(route => {
+      if (auths.includes(route.meta.auth)) {
+        if (route.children) {
+          route.children = filter(route.children)
+        }
+        return route
+      }
+    })
+  }
+  
+  return filter(per)
 }
