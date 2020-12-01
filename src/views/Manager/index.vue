@@ -1,9 +1,7 @@
 <template>
 <div>
   管理页面
-  <router>
-
-  </router>
+  <router-view></router-view>
 </div>
 </template>
 

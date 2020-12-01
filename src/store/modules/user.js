@@ -3,6 +3,7 @@ import * as api from '@/api/user'
 import {setLocal, getLocal} from '@/utils/local'
 import per from '@/router/per'
 import router from '@/router/index'
+import fa from "element-ui/src/locale/lang/fa"
 
 
 function filterRouter(authList) {
@@ -13,7 +14,6 @@ function filterRouter(authList) {
          if (route.children) {
            route.children = filter(route.children)
          }
-         
          return route
        }
     })
@@ -27,12 +27,13 @@ export default {
   state: {
     userInfo: {}, // 存储用户数据
     hasPermission: false, // 判断没有没有权限
-    menuPermission: false, // 默认没有菜单权限
-    btnPermission: {edit: true, delete: false},
+    menuPermission: false, // 默认没有处理菜单
+    btnPermission: {edit: true, delete: false, add: false},
   },
   mutations: {
     // 设置用户信息
     [types.SET_USER] (state, userInfo) {
+      console.log('userInfo -> ', userInfo)
       state.userInfo = userInfo
       if (userInfo && userInfo.token) {
         setLocal('token', userInfo.token) // 更新token
@@ -64,6 +65,7 @@ export default {
       if (!getLocal('token')) return false // 没有权限
       try {
         const result = await api.validate() // 会调用ajax请求，会携带token，后端会验证
+        console.log('result -> ', result)
         commit(types.SET_USER, result)
         commit(types.SET_PERMISSION, true)
       } catch (e) {
@@ -73,7 +75,7 @@ export default {
     },
     [types.SET_ROUTER] ({commit, state}) {
       const authList = state.userInfo.authList // 用户权限 去路由表筛选
-  
+      console.log('authList0000', authList)
       if (authList) {
         const routes = filterRouter(authList) // 过滤路由
         let route = router.options.routes.find(item => item.path === 'manager') // 找到管理的路由

@@ -18,7 +18,7 @@
           <el-submenu index="0">
             <template slot="title">{{userInfo.username}}</template>
             <el-menu-item index="/manager">管理页面</el-menu-item>
-            <el-menu-item index="/login">退出登录</el-menu-item>
+            <el-menu-item @click="loginOut">退出登录</el-menu-item>
           </el-submenu>
         </template>
       </el-menu>
@@ -28,14 +28,22 @@
 
 <script>
 import {createNamespacedHelpers} from 'vuex'
+import {setLocal} from "@/utils/local"
 const {mapState} = createNamespacedHelpers('user')
 
 export default {
   name: "PageHeader",
   computed: {
     userInfo() {
-      console.log(' -> ', this.$store.state.user.userInfo)
+      // console.log(' -> ', this.$store.state.user.userInfo)
       return this.$store.state.user.userInfo
+    }
+  },
+  methods: {
+    loginOut () {
+      console.log('0 -> ')
+      this.$router.push('/login')
+      setLocal('token', {}) // 更新token
     }
   },
 }

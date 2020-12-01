@@ -34,7 +34,6 @@ class Http {
       
       if (Object.keys(this.queue).length === 0) {
         // 当前是所有请求中的第一个
-        console.log('start -> ')
         loadingInstance = Loading.service({fullscreen: true})
       }
       
@@ -51,7 +50,6 @@ class Http {
     instance.interceptors.response.use(res => {
       delete this.queue[url]
       if (Object.keys(this.queue).length === 0) {
-        console.log('close -> ')
         // loadingInstance.close()
       }
   
@@ -59,7 +57,7 @@ class Http {
         if (res.data.err === 1) {
           return Promise.reject(res.data.err)
         }
-        console.log('res.data.data -> ', res.data.data)
+        // console.log('res.data.data -> ', res.data.data)
         return Promise.resolve(res.data.data)
       } else {
         // 401 403... 去判断每个状态码代表的含义

@@ -1,7 +1,4 @@
 export default [{
   path: '/manager',
-  component: () => import(/* webpackChunkName: "article post" */ '../views/Manager/index.vue'),
-  meta: {
-    needLogin: true
-  }
+  component: () => import(/* webpackChunkName: "manager" */ '../views/Manager/index.vue'),
 }]

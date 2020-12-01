@@ -3,8 +3,9 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home/index'
 import hooks from './hooks'
 import article from './article.router'
+import manager from './manager.router'
 
-console.log('article -> ', article)
+// console.log('article -> ', article)
 
 Vue.use(VueRouter)
 
@@ -22,13 +23,13 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "login" */ '../views/User/login.vue')
   },
-  ...article
+  ...article,
+  ...manager
 ]
 
 const router = new VueRouter({
   routes
 })
-
 // 需要给路由增加多个钩子 每个钩子实现一个具体功能 beforeEach next
 Object.values(hooks).forEach(hook => {
   // 绑定hook中的this是路由的实例 好处可以在方法进行跳转
