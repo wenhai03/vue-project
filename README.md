@@ -1,19 +1,17 @@
-# vue-permission
+## 前端权限控制思路
+### 2.1 菜单的控制
+`在登录请求中，会得到权限数据，当然这个需要后端返回数据的支持，前端根据权限数据，展示对应的菜单，
+点击菜单才能看到相关的界面`
 
-## Project setup
-```
-yarn install
-```
+### 2.2 界面的控制
+`如果用户没有登录，手动在地址栏敲入管理界面的地址，则需要跳转到登录界面`
+如果用户已经登录，可是手动敲入非权限内的地址，则需要跳转404界面
 
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
+### 2.3 按钮的控制
+`在某个菜单的界面中，还得根据数据，展示出可进行操作的按钮，比如删除，修改，增加`
 
-### Compiles and minifies for production
-```
-yarn build
-```
+### 2.4 请求和响应的控制
+`如果用户通过非 常规操作，比如通过浏览器调式工具将某些禁用的按钮变成启用状态，此时发的请求，也应该被前端所拦截`
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+
+
