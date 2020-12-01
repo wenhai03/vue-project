@@ -10,6 +10,15 @@ if (process.env.NODE_ENV !== 'production') {
   require('./mock')
 }
 
+Vue.directive('has', { // v-has='edit'
+  inserted(el, bindings, vnode){
+    const exists = vnode.context.$store.state.user.btnPermission[bindings.value]
+    if (!exists) {
+      el.parentNode.removeChild(el)
+    }
+  }
+})
+
 Vue.config.productionTip = false
 
 Vue.use(ElementUI);

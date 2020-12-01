@@ -1,9 +1,17 @@
 <template>
-  <el-carousel :interval="4000" type="card" height="200px">
-    <el-carousel-item v-for="item in bannerList" :key="item._id">
-      <img :src="item.url" style="max-width: 100%; height: 100%" alt="pic">
-    </el-carousel-item>
-  </el-carousel>
+ <div>
+   <el-carousel :interval="4000" type="card" height="200px">
+     <el-carousel-item v-for="item in bannerList" :key="item._id">
+       <img :src="item.url" style="max-width: 100%; height: 100%" alt="pic">
+     </el-carousel-item>
+   </el-carousel>
+   <br>
+   <br>
+
+   <button v-has="'edit'">编辑按钮</button>
+   <button v-has="'delete'">删除按钮</button>
+ </div>
+
 </template>
 
 <script>

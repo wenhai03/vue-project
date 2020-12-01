@@ -27,7 +27,8 @@ export default {
   state: {
     userInfo: {}, // 存储用户数据
     hasPermission: false, // 判断没有没有权限
-    menuPermission: false // 默认没有菜单权限
+    menuPermission: false, // 默认没有菜单权限
+    btnPermission: {edit: true, delete: false},
   },
   mutations: {
     // 设置用户信息
