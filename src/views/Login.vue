@@ -1,6 +1,6 @@
 <template>
   <div class="login">
-    <el-form :model="userData" :rules="rules" ref="form" v-loading="isLogin">
+    <el-form :model="userData" :rules="rules" ref="form" v-loading="isLogin" @keyup.enter="submitForm"  >
       <h2>用户登录</h2>
       <el-form-item prop="username">
         <label for="username">用户名</label>：
@@ -19,7 +19,7 @@
         </el-input>
       </el-form-item>
       <el-form-item>
-        <el-button @click="submitForm" type="primary">登录</el-button>
+        <el-button @keyup.enter="submitForm" @click="submitForm" type="primary">登录</el-button>
       </el-form-item>
     </el-form>
   </div>

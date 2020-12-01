@@ -8,11 +8,11 @@ import store from '@/store'
 Vue.use(VueRouter)
 
 const map = {
-  '/menu/one': { path: 'menu/one', component: () => import('@/views/Page1.vue') },
-  '/menu/two': { path: 'menu/two', component: () => import('@/views/Page1.vue') },
-  '/menu/three': { path: 'menu/three', component: () => import('@/views/Page1.vue') },
-  '/menu/four': { path: 'menu/four', component: () => import('@/views/Page1.vue') },
-  '/menu/five': { path: 'menu/five', component: () => import('@/views/Page1.vue') }
+  '/menu/one': { path: 'menu/one', component: () => import('@/views/Page.vue') },
+  '/menu/two': { path: 'menu/two', component: () => import('@/views/Page.vue') },
+  '/menu/three': { path: 'menu/three', component: () => import('@/views/Page.vue') },
+  '/menu/four': { path: 'menu/four', component: () => import('@/views/Page.vue') },
+  '/menu/five': { path: 'menu/five', component: () => import('@/views/Page.vue') }
 }
 
 const routes = [

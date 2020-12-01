@@ -7,6 +7,7 @@ export default new Vuex.Store({
   state: {
     breads: [],
     user: sessionStorage.getItem('v-user') ? JSON.parse(sessionStorage.getItem('v-user')) : {}
+    // user: null
   },
   mutations: {
     addBread (state, bread) {
